@@ -1,6 +1,7 @@
 package ie.corktrainingcentre.wordwheel;
 
 import android.content.res.Resources;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,6 +15,8 @@ import java.util.Random;
  */
 public class WordWheel {
 
+    private final String TAG = "Word Wheel";
+    private final boolean   LOGS_ON = true;
 
     private String word;
     private char centreChar;
@@ -23,7 +26,8 @@ public class WordWheel {
     public WordWheel(int wordLength){
 
         this.wordlenght = wordLength;
-        word = getWordFromDic();
+        setWord(getWordFromDic());
+        setCentreLetter();
 
     }
 // TODO Make this method more usable to by using a parameter of the file to be read
@@ -41,7 +45,7 @@ public class WordWheel {
 //      read the file and add all the words that are equal the the length we have selected
         try {
             while ((word = bufferedReader.readLine()) != null)
-                if(word.length() == getWord().length())
+                if(word.length() == getWordlenght())
                     words.add(word);
         } catch (Exception e) {
             e.printStackTrace();
@@ -49,6 +53,7 @@ public class WordWheel {
 
 //        pick out a random word from the words arraylist that we have populated
         Random rand = new Random();
+        if(LOGS_ON) Log.d(TAG, "words size is " + words.size());
         int index = rand.nextInt(words.size());
 
         return words.get(index);
@@ -79,6 +84,16 @@ public class WordWheel {
 
     public void setWordlenght(int wordlenght) {
         this.wordlenght = wordlenght;
+    }
+
+    private void setCentreLetter(){
+
+        Random rand = new Random();
+        int centreIndex = rand.nextInt(getWordlenght());
+        if(LOGS_ON) Log.d(TAG, "Setting centre character " + getWord().charAt(centreIndex));
+        setCentreChar(getWord().charAt(centreIndex));
+
+
     }
 
 

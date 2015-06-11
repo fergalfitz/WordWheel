@@ -3,15 +3,21 @@ package ie.corktrainingcentre.wordwheel;
 import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TextView;
 
 
 public class MainActivity extends Activity {
 
 
+    private final String TAG = "MainActivity";
+    private final boolean   LOGS_ON = true;
     TextView textView;
+    TextView textView2;
+    EditText userInputEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +25,13 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         textView = (TextView) findViewById(R.id.textView);
+        textView2 = (TextView) findViewById(R.id.textView2);
+        userInputEditText = (EditText) findViewById(R.id.editText);
         WordWheel wordWheel = new WordWheel(9);
         textView.setText(wordWheel.getWord());
+        if(LOGS_ON) Log.d(TAG, "Word centre character is " + wordWheel.getCentreChar());
+        String centre = new String(String.valueOf(wordWheel.getCentreChar()));
+        textView2.setText(centre);
     }
 
     @Override

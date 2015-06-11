@@ -63,7 +63,8 @@ public class MainActivity extends Activity {
 
         wordWheel.setWordlenght(Integer.valueOf((String)spinner.getSelectedItem()));
         textView.setText(wordWheel.getWord());
-        textView2.setText(String.valueOf(wordWheel.getCentreChar()));
+        //textView2.setText(String.valueOf(wordWheel.getCentreChar()));
+        textView2.setText(wordWheel.scrambledWord(wordWheel.getWord()));
 
 
     }

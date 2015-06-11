@@ -95,6 +95,38 @@ public class WordWheel {
 
 
     }
+    // Jumbles all the letters of a word and returns the result
+    public String scrambledWord(String word)
+    {
+        char[] scrambled = word.toCharArray();
+
+        int lenght = word.length();
+        Random random = new Random();
+        int oldCharIndex=0;
+        int newCharIndex=0;
+        char tempChar= ' ';
+        char c = ' ';
+
+        for(int i=0; i< 50;i++)
+        {
+            // Assign a ramdom index to oldCharIndex within the bounds of the word
+            oldCharIndex = random.nextInt(lenght);
+
+            // Assign a ramdom index to newCharIndex within the bounds of the word
+            newCharIndex = random.nextInt(lenght);
+
+            // save the old characters that is going to be moved
+            tempChar = scrambled[oldCharIndex];
+            scrambled[oldCharIndex] = scrambled[newCharIndex];
+            scrambled[newCharIndex] = tempChar;
+
+        }
+        Log.d(TAG,scrambled.toString());
+        String string1 = new String(scrambled);
+        return string1;
+
+
+    }
 
 
 }

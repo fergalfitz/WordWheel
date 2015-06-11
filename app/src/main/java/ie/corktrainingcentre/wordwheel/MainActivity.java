@@ -27,11 +27,10 @@ public class MainActivity extends Activity {
         textView = (TextView) findViewById(R.id.textView);
         textView2 = (TextView) findViewById(R.id.textView2);
         userInputEditText = (EditText) findViewById(R.id.editText);
+
         WordWheel wordWheel = new WordWheel(9);
         textView.setText(wordWheel.getWord());
-        if(LOGS_ON) Log.d(TAG, "Word centre character is " + wordWheel.getCentreChar());
-        String centre = new String(String.valueOf(wordWheel.getCentreChar()));
-        textView2.setText(centre);
+        textView2.setText(String.valueOf(wordWheel.getCentreChar()));
     }
 
     @Override

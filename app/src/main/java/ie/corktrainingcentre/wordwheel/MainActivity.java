@@ -39,7 +39,7 @@ public class MainActivity extends Activity {
         ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),
                 android.R.layout.simple_expandable_list_item_1,lengthsOfWord);
         // Specify the layout to use when the list of choices appears
-       adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+       adapter.setDropDownViewResource(android.R.layout.sp);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
         // Add a on selected listener to the spinner

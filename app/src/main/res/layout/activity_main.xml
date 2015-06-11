@@ -23,22 +23,21 @@
                 android:text="Length of Word:"
                 android:background="#ffcf994d"
                 android:singleLine="true"
-                android:textColor="#ff000000" />
+                android:textColor="#ff000000"
+                android:gravity="center_vertical|center_horizontal|fill_vertical" />
 
             <Spinner
-                android:layout_width="83dp"
+                android:layout_width="52dp"
                 android:layout_height="match_parent"
                 android:id="@+id/spinner"
-                android:prompt="@string/status_bar_notification_info_overflow"
-                android:background="#ffcf994d" />
+                android:background="#ffcf994d"
+                android:layout_marginRight="20dp" />
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="Display Wheel"
-                android:id="@+id/diplay"
-                android:background="#ffcf994d"
-                android:textColor="#ff000000" />
+                android:id="@+id/display" />
 
         </LinearLayout>
 
@@ -70,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Check Word"
-                android:id="@+id/button"
+                android:id="@+id/checkWordButton"
                 android:layout_weight="1"
                 android:layout_margin="15dp"
                 android:layout_marginLeft="15dp"

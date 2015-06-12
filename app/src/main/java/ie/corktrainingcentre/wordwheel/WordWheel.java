@@ -32,6 +32,10 @@ public class WordWheel {
 
     }
 
+    public String solutions(String word){
+        return "";
+    }
+
 // TODO Make this method more usable to by using a parameter of the file to be read
     private String getWordFromDic() {
 

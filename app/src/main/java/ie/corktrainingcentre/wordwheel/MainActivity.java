@@ -25,6 +25,7 @@ public class MainActivity extends Activity {
     EditText userInputEditText;
     Button checkWordButton;
     Button displayWheelButton;
+    Button solutionsButton;
     Spinner spinner;
     WordWheel wordWheel;
     TextView resultsTextView;
@@ -56,6 +57,15 @@ public class MainActivity extends Activity {
             }
         });
 
+        // add onClickListener to the Solutions button
+        solutionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String solutions = wordWheel.solutions(wordWheel.getWord());
+            }
+        });
+
+
         refreshWordWheel();
     }
 
@@ -74,6 +84,7 @@ public class MainActivity extends Activity {
         userInputEditText = (EditText) findViewById(R.id.editText);
         checkWordButton = (Button) findViewById(R.id.checkWordButton);
         displayWheelButton = (Button) findViewById(R.id.display);
+        solutionsButton = (Button) findViewById(R.id.solutionsButton);
         spinner = (Spinner) findViewById(R.id.spinner);
         resultsTextView = (TextView) findViewById(R.id.resultsTextView);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -84,6 +95,8 @@ public class MainActivity extends Activity {
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
         // Must be done after spinner has been intialized
+
+        // TODO fix the spinner
         wordWheel = new WordWheel(Integer.valueOf((String) spinner.getSelectedItem()));
 
 
@@ -98,7 +111,7 @@ public class MainActivity extends Activity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // TODO Auto-generated method stub
+
 
             }
 

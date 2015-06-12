@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -33,29 +34,44 @@ public class WordWheel {
 
     }
 
-   /* public String solutions(String word){
+    public String solutions(String characters){
 
-//        open the
+//        open the file
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(FILE);
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
 
-        String word = "";
-        ArrayList<String> words = new ArrayList<>();
+        String str = "";
+        String wordFromFile = "";
+        ArrayList<String> validSolutions = new ArrayList<>();
+        Result result = new Result();
 
 //      read the file and add all the words that are equal the the length we have selected
         try {
-            while ((word = bufferedReader.readLine()) != null)
-                if(word.length() == getWordlenght())
-                    words.add(word);
+            while ((wordFromFile = bufferedReader.readLine()) != null){
+
+//                code to store all of valid words that can made from the wordWheel word
+                result = validCharacters(wordFromFile);
+                if(result.isValid())
+                    validSolutions.add(wordFromFile);
+
+
+
+            }
+//
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Collections.sort(validSolutions);
+        for(String validWord : validSolutions) {
+            if(validWord.length() >= 4)
+                str = str + validWord + "\n";
+        }
 
-
-        return "";
-    }*/
+        return str;
+    }
 
 // TODO Make this method more usable to by using a parameter of the file to be read
     private String getWordFromDic() {
@@ -98,44 +114,58 @@ public class WordWheel {
             return result;
         }
         else{
-            boolean[] boolUsedCharacters = new boolean[getWordlenght()];
-            char c = ' ';
-            boolean foundCharacter = false;
 
-                for(int i =0;i< wordToBeChecked.length();i++)
-                {
-                    c = wordToBeChecked.charAt(i);
-                    foundCharacter = false; // We start a new search, so set foundCharter to false
+            result = validCharacters(wordToBeChecked);
+            return result;
+        }
+
+
+    }
+
+    private Result validCharacters(String wordToBeChecked){
+
+        boolean[] boolUsedCharacters = new boolean[getWordlenght()];
+        char c = ' ';
+        boolean foundCharacter = false;
+
+        Result result = new Result();
+
+        for(int i =0;i< wordToBeChecked.length();i++)
+        {
+            c = wordToBeChecked.charAt(i);
+            foundCharacter = false; // We start a new search, so set foundCharter to false
 //                    again
 
 //                    Uses the character in 'c' and iterates through the wordWheel word to see if
 //                    'c' is equal to any of the characters in wordWheel that have not been used
 //                    already in the comparing process.
-                    for (int j = 0; j < getWordlenght();j++) {
+            for (int j = 0; j < getWordlenght();j++) {
 
-                        if(boolUsedCharacters[j] == false && c == getWord().charAt(j)) {
-                            boolUsedCharacters[j] = true;
-                            foundCharacter = true;
-                            break;
-                        }
+                if(boolUsedCharacters[j] == false && c == getWord().charAt(j)) {
+                    boolUsedCharacters[j] = true;
+                    foundCharacter = true;
+                    break;
+                }
 
-                    }
+            }
 //                    if 'c' is not found in the wordWheel word the user has entered an incorrect
 //                    guess
-                    if(!foundCharacter) {
+            if(!foundCharacter) {
 
-                        result.setValid(false);
-                        result.setMessage("\n Word Wheel do not have a :" + c);
-                        return  result;
-                    }
-                }
+                result.setValid(false);
+                result.setMessage("\n Word Wheel do not have a :" + c);
+                return  result;
+            }
         }
 
-        result.setValid(true);
-        result.setMessage("Correct, well done ");
-        return result;
 
-    }
+    result.setValid(true);
+    result.setMessage("Correct, well done ");
+    return result;
+
+
+
+}
 
     private boolean checkIfWordIsEnglish(String wordToBeChecked){
 

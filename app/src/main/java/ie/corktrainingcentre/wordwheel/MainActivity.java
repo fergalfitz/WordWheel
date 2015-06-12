@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
@@ -52,8 +53,18 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String userInput = userInputEditText.getText().toString().toLowerCase().trim();
-                String result = wordWheel.checkWord(userInput);
-                resultsTextView.append("\n" + result);
+//
+//                guess word must be equal or greater than four characters
+                if(userInput.length() < 4){
+
+                    Toast.makeText(getApplicationContext(), "Guess with four characters or more ;)",
+                            Toast.LENGTH_SHORT).show();
+                    userInputEditText.setText("");
+                }
+                else {
+                    Result result = wordWheel.checkWord(userInput);
+                    resultsTextView.append("\n" + result.getMessage());
+                }
             }
         });
 
@@ -62,6 +73,8 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String solutions = wordWheel.solutions(wordWheel.getWord());
+                resultsTextView.setText(solutions);
+
             }
         });
 
@@ -72,9 +85,9 @@ public class MainActivity extends Activity {
     private void refreshWordWheel()
     {
         wordWheel.setWordlenght(Integer.valueOf((String) spinner.getSelectedItem()));
-        //textView.setText(wordWheel.getWord());
+        textView.setText(wordWheel.getWord());
         //textView2.setText(String.valueOf(wordWheel.getCentreChar()));
-        textView.setText(wordWheel.scrambledWord(wordWheel.getWord()));
+        textView2.setText(wordWheel.scrambledWord(wordWheel.getWord()));
         resultsTextView.setText("");
     }
     private void intializeObjectsFromXML_Resourses()

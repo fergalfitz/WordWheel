@@ -62,9 +62,9 @@ public class MainActivity extends Activity {
     private void refreshWordWheel()
     {
         wordWheel.setWordlenght(Integer.valueOf((String) spinner.getSelectedItem()));
-        textView.setText(wordWheel.getWord());
+        //textView.setText(wordWheel.getWord());
         //textView2.setText(String.valueOf(wordWheel.getCentreChar()));
-        textView2.setText(wordWheel.scrambledWord(wordWheel.getWord()));
+        textView.setText(wordWheel.scrambledWord(wordWheel.getWord()));
         resultsTextView.setText("");
     }
     private void intializeObjectsFromXML_Resourses()

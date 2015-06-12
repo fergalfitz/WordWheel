@@ -65,27 +65,38 @@ public class WordWheel {
     public String checkWord(String wordToBeChecked){
 
         if(checkIfWordIsEnglish(wordToBeChecked) == false)
-            //TODO put wordToBeChecked into  the string
-            return "Sorry, we have no record of -------- in the Dictionary";
+            return "Sorry, we have no record of \" "  + wordToBeChecked + "\" + n the dictionary";
         else{
-            boolean[] usedCharacters = new boolean[getWordlenght()];
+            boolean[] boolUsedCharacters = new boolean[getWordlenght()];
             char c = ' ';
+            boolean foundCharacter = false;
 
                 for(int i =0;i< wordToBeChecked.length();i++)
                 {
                     c = wordToBeChecked.charAt(i);
+                    foundCharacter = false; // We start a new search, so set foundCharter to false
+//                    again
+
+//                    Uses the character in 'c' and iterates through the wordWheel word to see if
+//                    'c' is equal to any of the characters in wordWheel that have not been used
+//                    already in the comparing process.
                     for (int j = 0; j < getWordlenght();j++) {
 
-                        if(usedCharacters[j] == false && c == getWord().charAt(j))
-                            usedCharacters[j] = true;
-                        else {
-                            return "\n Word Wheel do not have a :" + c;
+                        if(boolUsedCharacters[j] == false && c == getWord().charAt(j)) {
+                            boolUsedCharacters[j] = true;
+                            foundCharacter = true;
+                            break;
                         }
+
                     }
+//                    if 'c' is not found in the wordWheel word the user has entered an incorrect
+//                    guess
+                    if(!foundCharacter)
+                        return "\n Word Wheel do not have a :" + c;
                 }
         }
 
-        return "";
+        return "Correct";
     }
 
     private boolean checkIfWordIsEnglish(String wordToBeChecked){

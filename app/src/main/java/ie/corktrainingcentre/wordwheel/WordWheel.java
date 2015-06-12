@@ -56,15 +56,13 @@ public class WordWheel {
                 if(result.isValid())
                     validSolutions.add(wordFromFile);
 
-
-
             }
 //
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Collections.sort(validSolutions);
+//        TODO implement some sort of a comparator to some the large words first
         for(String validWord : validSolutions) {
             if(validWord.length() >= 4)
                 str = str + validWord + "\n";

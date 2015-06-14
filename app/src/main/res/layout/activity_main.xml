@@ -3,8 +3,7 @@
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
-    android:background="@drawable/abc_btn_check_material">
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -14,24 +13,24 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:weightSum="1">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/editText2"
                 android:text="Length of Word:"
-                android:background="#ffcf994d"
                 android:singleLine="true"
                 android:textColor="#ff000000"
-                android:gravity="center_vertical|center_horizontal|fill_vertical" />
+                android:gravity="center_vertical|center_horizontal|fill_vertical"
+                android:layout_weight="0.49" />
 
             <Spinner
                 android:layout_width="52dp"
                 android:layout_height="match_parent"
                 android:id="@+id/spinner"
-                android:background="#ffcf994d"
-                android:layout_marginRight="20dp" />
+                android:layout_weight="0.50" />
 
             <Button
                 android:layout_width="wrap_content"

@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Random;
 
 /**
@@ -62,14 +63,69 @@ public class WordWheel {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        TODO implement some sort of a comparator to some the large words first
+
+
+        Collections.sort(validSolutions,sortWithLargeWordsFirst);
+
+        int i=1;
+
+//        This is to make headings of the word length that we are currently at
+        int lengthofWord = validSolutions.get(0).length();
+        str = "WORDS WITH "+ String.valueOf(lengthofWord) +" CHARATERS\n";
+
         for(String validWord : validSolutions) {
-            if(validWord.length() >= 4)
-                str = str + validWord + "\n";
+            if(validWord.length() >= 4){
+
+
+                if(validWord.length() != lengthofWord)
+                {
+                    lengthofWord = validWord.length();
+                    str = str  + "\n\nWORDS WITH "+ String.valueOf(lengthofWord) +" CHARATERS\n";
+                }
+
+
+//                To get three words to display per line do this
+                if(i%3 == 0 )
+                {
+//                    str = str + validWord + "\n";
+                    str = str + String.format("%15s",validWord) + "\n" ;
+
+                }
+                else
+                {
+//                    str = str + validWord + "\t\t\t";
+                    str = str + String.format("%15s",validWord);
+                }
+
+                i++;
+            }
+
         }
 
         return str;
     }
+//
+//    Imolement out own compator to first use the length of the word for compasion and then the
+//        normal string comparision on the letters in the word
+    public static Comparator<String> sortWithLargeWordsFirst = new Comparator<String>() {
+
+
+
+//    If a negative value is returned ....
+    @Override
+    public int compare(String a, String b) {
+
+        int lengthCompare = b.length() - a.length();
+        if (lengthCompare != 0)
+            return lengthCompare;
+
+        int alphabetLetterCompare = a.compareTo(b);
+        return alphabetLetterCompare;
+
+    }
+};
+
+
 
 // TODO Make this method more usable to by using a parameter of the file to be read
     private String getWordFromDic() {

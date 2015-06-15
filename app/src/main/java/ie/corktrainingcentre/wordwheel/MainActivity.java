@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -26,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
 
 
 public class MainActivity extends Activity {
@@ -128,8 +130,45 @@ public class MainActivity extends Activity {
 //          update the scores
         totalScore = totalScore + currentScore;
         currentScore = 0;
-        textViewCurrentScore.setText("Current Score --> " + currentScore);
+//        textViewCurrentScore.setTextColor(Color.CYAN);
+//        textView2TotalScore.setTextColor(Color.BLUE);
+//        textViewCurrentScore.setText("Current Score --> " + currentScore);
         textView2TotalScore.setText(("Total Score --> " + totalScore));
+//        only do if its not the first time
+        if ((totalScore > 0))
+        {
+            textViewCurrentScore.setTextColor(Color.BLUE);
+            textView2TotalScore.setTextColor(Color.RED);
+        }
+        final Handler h2 = new Handler();
+        Runnable run = new Runnable() {
+
+            @Override
+            public void run() {
+
+                textViewCurrentScore.setTextColor(Color.GRAY);
+                textViewCurrentScore.setText("Current Score --> " + currentScore);
+
+               // h2.postDelayed(this, 500);
+            }
+        };
+        h2.postDelayed(run, 1000);
+        Runnable run2 = new Runnable() {
+
+            @Override
+            public void run() {
+
+
+                textView2TotalScore.setTextColor(Color.GRAY);
+
+                // h2.postDelayed(this, 500);
+            }
+        };
+
+        h2.postDelayed(run2, 1500);
+
+
+
         wordWheel.setWordlenght(Integer.valueOf((String) spinner.getSelectedItem()));
 //        textView.setText(wordWheel.getWord());
 //        textView2.setText(wordWheel.scrambledWord(wordWheel.getWord()));

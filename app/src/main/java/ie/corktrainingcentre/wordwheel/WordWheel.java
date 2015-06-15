@@ -19,7 +19,7 @@ public class WordWheel {
 
     private final String TAG = "Word Wheel";
     private final boolean   LOGS_ON = true;
-    private final String FILE = "res/raw/list_of_words.txt"; // res/raw/test.txt also work.
+    private final String FILE = "res/raw/list_of_words.txt";
 
     private String word;
     private char centreChar;

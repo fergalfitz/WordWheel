@@ -94,11 +94,16 @@ public class MainActivity extends Activity {
 //                        if the current input word is geater than any previous guessed set the wordlength to the highest score
                         if(userInput.length() > currentScore) {
                             currentScore = userInput.length();
-                            textViewCurrentScore.setText("Current Score: " + currentScore);
+                            textViewCurrentScore.setText("This Wheel Score: " + currentScore);
                         }
                         if(userInput.length() == wordWheel.getWord().length())
                         {
                             checkWordButton.setEnabled(false);
+                            Toast.makeText(getApplicationContext(), "10 point bonus for guessing full word correctly" +
+                                            wordWheel.getCentreChar() + "\"",
+                                    Toast.LENGTH_SHORT).show();
+                            currentScore += 10;
+                            textViewCurrentScore.setText("This Wheel Score --> " + currentScore);
 
                         }
                     }
@@ -128,6 +133,7 @@ public class MainActivity extends Activity {
     private void refreshWordWheel()
     {
 //          update the scores
+//        if(wordWheel.getWord().length() ==)
         totalScore = totalScore + currentScore;
         currentScore = 0;
 //        textViewCurrentScore.setTextColor(Color.CYAN);
@@ -140,6 +146,9 @@ public class MainActivity extends Activity {
             textViewCurrentScore.setTextColor(Color.BLUE);
             textView2TotalScore.setTextColor(Color.RED);
         }
+
+
+//        This is to give the effect of the score changing dynamically
         final Handler h2 = new Handler();
         Runnable run = new Runnable() {
 
@@ -147,12 +156,12 @@ public class MainActivity extends Activity {
             public void run() {
 
                 textViewCurrentScore.setTextColor(Color.GRAY);
-                textViewCurrentScore.setText("Current Score --> " + currentScore);
+                textViewCurrentScore.setText("This Wheel Score --> " + currentScore);
 
                // h2.postDelayed(this, 500);
             }
         };
-        h2.postDelayed(run, 1000);
+
         Runnable run2 = new Runnable() {
 
             @Override
@@ -164,8 +173,9 @@ public class MainActivity extends Activity {
                 // h2.postDelayed(this, 500);
             }
         };
-
+        h2.postDelayed(run, 1000);
         h2.postDelayed(run2, 1500);
+
 
 
 
@@ -293,7 +303,7 @@ public class MainActivity extends Activity {
             int offsetForChar = 9;
 
             paint.setColor(Color.BLACK);
-            paint.setTextSize(45);
+            paint.setTextSize(x/15);
             Typeface tf = Typeface.create("New Times Roman", Typeface.NORMAL);
             paint.setTypeface(tf);
             paint.setStrokeWidth(2);

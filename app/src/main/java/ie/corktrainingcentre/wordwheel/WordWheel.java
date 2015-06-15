@@ -125,8 +125,6 @@ public class WordWheel {
     }
 };
 
-
-
 // TODO Make this method more usable to by using a parameter of the file to be read
     private String getWordFromDic() {
 
@@ -222,8 +220,21 @@ public class WordWheel {
 
 
     result.setValid(true);
-    result.setMessage("Correct with "+ wordToBeChecked.length() +" out of "+ getWordlenght() + " letters, well done ");
-    return result;
+        if(getWordlenght() > wordToBeChecked.length())
+        {
+            result.setMessage("Correct with "+ wordToBeChecked.length() +" out of "+
+                    getWordlenght() + " letters, well done " +
+                        "\nTry again for longer word,  \nPress DisplayWord Wheel for new Wheel to be displayed " +
+                        "\nor Press Solutions for the answers");
+            return result;
+        }
+        else
+        {
+            result.setMessage("Correct guessed full word! Well Done :)" +
+                            "\nPress Solutions for more correct words or \nDisplay for a new WordWheel");
+            return result;
+        }
+
 
 
 

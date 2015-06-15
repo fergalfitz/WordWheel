@@ -40,9 +40,13 @@ public class MainActivity extends Activity {
     Button solutionsButton;
     Spinner spinner;
     WordWheel wordWheel;
+    TextView textViewCurrentScore;
+    TextView textView2TotalScore;
     TextView resultsTextView;
     LinearLayout wordWheelLinearLayout;
     final String[] lengthsOfWords = { "7","8","9", "10","11", "12"};
+    int currentScore;
+    int totalScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
 
                 refreshWordWheel();
+                checkWordButton.setEnabled(true);
             }
         });
 
@@ -82,6 +87,21 @@ public class MainActivity extends Activity {
                 else {
                     Result result = wordWheel.checkWord(userInput);
                     resultsTextView.setText("\n" + result.getMessage());
+                    if(result.isValid()){
+
+//                        if the current input word is geater than any previous guessed set the wordlength to the highest score
+                        if(userInput.length() > currentScore) {
+                            currentScore = userInput.length();
+                            textViewCurrentScore.setText("Current Score: " + currentScore);
+                        }
+                        if(userInput.length() == wordWheel.getWord().length())
+                        {
+                            checkWordButton.setEnabled(false);
+
+                        }
+                    }
+                    else
+                        userInputEditText.setText("");
                 }
             }
         });
@@ -92,6 +112,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 String solutions = wordWheel.solutions(wordWheel.getWord());
                 resultsTextView.setText(solutions);
+                checkWordButton.setEnabled(false);
 
             }
         });
@@ -104,6 +125,11 @@ public class MainActivity extends Activity {
 
     private void refreshWordWheel()
     {
+//          update the scores
+        totalScore = totalScore + currentScore;
+        currentScore = 0;
+        textViewCurrentScore.setText("Current Score --> " + currentScore);
+        textView2TotalScore.setText(("Total Score --> " + totalScore));
         wordWheel.setWordlenght(Integer.valueOf((String) spinner.getSelectedItem()));
 //        textView.setText(wordWheel.getWord());
 //        textView2.setText(wordWheel.scrambledWord(wordWheel.getWord()));
@@ -114,11 +140,12 @@ public class MainActivity extends Activity {
         resultsTextView.setText("");
         wordWheelLinearLayout.removeAllViews();
         wordWheelLinearLayout.addView(new wordWheelView(this));
+        userInputEditText.setText("");
     }
     private void intializeObjectsFromXML_Resourses()
     {
-//        textView = (TextView) findViewById(R.id.textView);
-//        textView2 = (TextView) findViewById(R.id.textView2);
+        textViewCurrentScore = (TextView) findViewById(R.id.textView);
+        textView2TotalScore = (TextView) findViewById(R.id.textView2);
         userInputEditText = (EditText) findViewById(R.id.editText);
         checkWordButton = (Button) findViewById(R.id.checkWordButton);
         displayWheelButton = (Button) findViewById(R.id.display);
@@ -208,10 +235,17 @@ public class MainActivity extends Activity {
             canvas.drawPaint(paint);
             paint.setColor(Color.BLUE);
 
-
+//              outer circle
             paint.setStrokeWidth(5);
             canvas.drawCircle(x / 2, y / 2, (y / 2) -5, paint);
+
+//            fill circle with cyan
+            paint.setStyle(Paint.Style.FILL);
+            paint.setColor(Color.CYAN);
+            canvas.drawCircle(x / 2, y / 2, (y / 2) - 7, paint);
+
             paint.setColor(Color.RED);
+            paint.setStyle(Paint.Style.STROKE);
             paint.setStrokeWidth(30);
             canvas.drawCircle(x / 2, y / 2, y / 8, paint);
 

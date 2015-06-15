@@ -163,7 +163,7 @@ public class WordWheel {
 
         if(checkIfWordIsEnglish(wordToBeChecked) == false) {
 
-            result.setMessage( "Sorry, we have no record of \" " + wordToBeChecked + "\" + n the dictionary");
+            result.setMessage( "Sorry, we have no record of \" " + wordToBeChecked + "\"  the dictionary");
             result.setValid(false);
             return result;
         }
@@ -183,6 +183,14 @@ public class WordWheel {
         boolean foundCharacter = false;
 
         Result result = new Result();
+
+//        if word does not contain the centre character
+        if(!(wordToBeChecked.contains(String.valueOf(getCentreChar())))){
+
+            result.setValid(false);
+            result.setMessage("\n Guess must contain centre character :" + getCentreChar());
+            return  result;
+        }
 
         for(int i =0;i< wordToBeChecked.length();i++)
         {
@@ -214,7 +222,7 @@ public class WordWheel {
 
 
     result.setValid(true);
-    result.setMessage("Correct, well done ");
+    result.setMessage("Correct with "+ wordToBeChecked.length() +" letters, well done ");
     return result;
 
 

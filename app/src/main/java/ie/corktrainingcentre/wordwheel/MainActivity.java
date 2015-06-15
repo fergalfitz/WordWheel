@@ -42,7 +42,7 @@ public class MainActivity extends Activity {
     WordWheel wordWheel;
     TextView resultsTextView;
     LinearLayout wordWheelLinearLayout;
-    final String[] lengthsOfWord = {"9", "10","11", "12"};
+    final String[] lengthsOfWords = { "7","8","9", "10","11", "12"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +81,7 @@ public class MainActivity extends Activity {
                 }
                 else {
                     Result result = wordWheel.checkWord(userInput);
-                    resultsTextView.append("\n" + result.getMessage());
+                    resultsTextView.setText("\n" + result.getMessage());
                 }
             }
         });
@@ -103,10 +103,9 @@ public class MainActivity extends Activity {
     private void refreshWordWheel()
     {
         wordWheel.setWordlenght(Integer.valueOf((String) spinner.getSelectedItem()));
-        textView.setText(wordWheel.getWord());
-        //textView2.setText(String.valueOf(wordWheel.getCentreChar()));
-        textView2.setText(wordWheel.scrambledWord(wordWheel.getWord()));
-        textView2.append("--" + wordWheel.getCentreChar());
+//        textView.setText(wordWheel.getWord());
+//        textView2.setText(wordWheel.scrambledWord(wordWheel.getWord()));
+//        textView2.append("--" + wordWheel.getCentreChar());
         resultsTextView.setText("");
         wordWheelLinearLayout.removeAllViews();
         wordWheelLinearLayout.addView(new wordWheelView(this));
@@ -132,14 +131,18 @@ public class MainActivity extends Activity {
         wordWheelLinearLayout.addView(new wordWheelView(this));
 
 
-        // Create an ArrayAdapter using the string array and a default spinner layout
+       /* // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),
                 android.R.layout.simple_expandable_list_item_1,lengthsOfWord);
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
-        // Must be done after spinner has been intialized
+        // Must be done after spinner has been intialized*/
+
+
+        ArrayAdapter adapter = new CustomArrayAdapter<CharSequence>(this, lengthsOfWords);
+        spinner.setAdapter(adapter);
 
         // TODO fix the spinner
         wordWheel = new WordWheel(Integer.valueOf((String) spinner.getSelectedItem()));
@@ -188,7 +191,7 @@ public class MainActivity extends Activity {
 //            paint.
             canvas.drawCircle(x / 2, y / 2, y / 2, paint);
             paint.setColor(Color.RED);
-            paint.setStrokeWidth(4);
+            paint.setStrokeWidth(30);
             canvas.drawCircle(x / 2, y / 2, y / 8, paint);
 
 
@@ -227,6 +230,31 @@ public class MainActivity extends Activity {
 
 
 
+
+        }
+    }
+
+    static class CustomArrayAdapter<T> extends ArrayAdapter<T>
+    {
+        public CustomArrayAdapter(Context ctx, T [] objects)
+        {
+            super(ctx, android.R.layout.simple_spinner_item, objects);
+        }
+
+
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent)
+        {
+            View view = super.getView(position, convertView, parent);
+
+            //we know that simple_spinner_item has android.R.id.text1 TextView:
+
+        /* if(isDroidX) {*/
+            TextView text = (TextView)view.findViewById(android.R.id.text1);
+            text.setTextColor(Color.BLACK);//choose your color :)
+        /*}*/
+
+            return view;
 
         }
     }

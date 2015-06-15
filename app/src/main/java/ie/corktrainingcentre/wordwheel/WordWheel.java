@@ -71,7 +71,7 @@ public class WordWheel {
 
 //        This is to make headings of the word length that we are currently at
         int lengthofWord = validSolutions.get(0).length();
-        str = "WORDS WITH "+ String.valueOf(lengthofWord) +" CHARATERS\n";
+        str = "WORDS WITH "+ String.valueOf(lengthofWord) +" CHARACTERS\n";
 
         for(String validWord : validSolutions) {
             if(validWord.length() >= 4){
@@ -222,7 +222,7 @@ public class WordWheel {
 
 
     result.setValid(true);
-    result.setMessage("Correct with "+ wordToBeChecked.length() +" letters, well done ");
+    result.setMessage("Correct with "+ wordToBeChecked.length() +" out of "+ getWordlenght() + " letters, well done ");
     return result;
 
 

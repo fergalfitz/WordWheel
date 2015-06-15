@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -30,10 +31,9 @@ import java.util.ArrayList;
 public class MainActivity extends Activity {
 
 
-    private final String TAG = "MainActivity";
+    private final String TAG = "Solutions";
     private final boolean   LOGS_ON = true;
-//    TextView textView;
-//    TextView textView2;
+
     EditText userInputEditText;
     Button checkWordButton;
     Button displayWheelButton;
@@ -97,6 +97,8 @@ public class MainActivity extends Activity {
         });
 
 
+
+
         refreshWordWheel();
     }
 
@@ -106,6 +108,9 @@ public class MainActivity extends Activity {
 //        textView.setText(wordWheel.getWord());
 //        textView2.setText(wordWheel.scrambledWord(wordWheel.getWord()));
 //        textView2.append("--" + wordWheel.getCentreChar());
+        if(LOGS_ON) Log.d(TAG,wordWheel.getWord());
+        if(LOGS_ON) Log.d(TAG,"--" + wordWheel.getCentreChar());
+        if(LOGS_ON) Log.d(TAG,"\n" + wordWheel.solutions(wordWheel.getWord()));
         resultsTextView.setText("");
         wordWheelLinearLayout.removeAllViews();
         wordWheelLinearLayout.addView(new wordWheelView(this));
@@ -145,6 +150,18 @@ public class MainActivity extends Activity {
         spinner.setAdapter(adapter);
 
         // TODO fix the spinner
+
+
+//        spinner.setOnClickListener(adapter.OnItemSelectedListener(){
+//            public void onItemSelected(AdapterView<?> parentView, View selectedItemView,
+//                                       int position, long id) {
+//                //wordWheel.setWordlenght(Integer.valueOf((String)spinner.getSelectedItem()));
+//            }
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parentView) {
+//            }
+//        });
+
         wordWheel = new WordWheel(Integer.valueOf((String) spinner.getSelectedItem()));
 
 
@@ -185,22 +202,27 @@ public class MainActivity extends Activity {
             Paint paint = new Paint();
 
 
+            paint.setColor(Color.TRANSPARENT);
             paint.setStyle(Paint.Style.STROKE);
+
             canvas.drawPaint(paint);
             paint.setColor(Color.BLUE);
-            paint.setStrokeWidth(2);
-//            paint.
-            canvas.drawCircle(x / 2, y / 2, y / 2, paint);
+
+
+            paint.setStrokeWidth(5);
+            canvas.drawCircle(x / 2, y / 2, (y / 2) -5, paint);
             paint.setColor(Color.RED);
             paint.setStrokeWidth(30);
             canvas.drawCircle(x / 2, y / 2, y / 8, paint);
 
 
 //            draw the center character
-            int offsetForChar = 10;
+            int offsetForChar = 9;
 
             paint.setColor(Color.BLACK);
-            paint.setTextSize(40);
+            paint.setTextSize(45);
+            Typeface tf = Typeface.create("New Times Roman", Typeface.NORMAL);
+            paint.setTypeface(tf);
             paint.setStrokeWidth(2);
             canvas.drawText(String.valueOf(wordWheel.getCentreChar()), (x / 2) -offsetForChar ,
                     (y / 2) + offsetForChar, paint);
@@ -227,10 +249,6 @@ public class MainActivity extends Activity {
                 canvas.drawText(letter, xPosition,yPosition, paint);
 
             }
-
-
-
-
 
         }
     }

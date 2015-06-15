@@ -32,8 +32,8 @@ public class MainActivity extends Activity {
 
     private final String TAG = "MainActivity";
     private final boolean   LOGS_ON = true;
-    TextView textView;
-    TextView textView2;
+//    TextView textView;
+//    TextView textView2;
     EditText userInputEditText;
     Button checkWordButton;
     Button displayWheelButton;
@@ -103,17 +103,17 @@ public class MainActivity extends Activity {
     private void refreshWordWheel()
     {
         wordWheel.setWordlenght(Integer.valueOf((String) spinner.getSelectedItem()));
-        textView.setText(wordWheel.getWord());
-        textView2.setText(wordWheel.scrambledWord(wordWheel.getWord()));
-        textView2.append("--" + wordWheel.getCentreChar());
+//        textView.setText(wordWheel.getWord());
+//        textView2.setText(wordWheel.scrambledWord(wordWheel.getWord()));
+//        textView2.append("--" + wordWheel.getCentreChar());
         resultsTextView.setText("");
         wordWheelLinearLayout.removeAllViews();
         wordWheelLinearLayout.addView(new wordWheelView(this));
     }
     private void intializeObjectsFromXML_Resourses()
     {
-        textView = (TextView) findViewById(R.id.textView);
-        textView2 = (TextView) findViewById(R.id.textView2);
+//        textView = (TextView) findViewById(R.id.textView);
+//        textView2 = (TextView) findViewById(R.id.textView2);
         userInputEditText = (EditText) findViewById(R.id.editText);
         checkWordButton = (Button) findViewById(R.id.checkWordButton);
         displayWheelButton = (Button) findViewById(R.id.display);
@@ -183,11 +183,12 @@ public class MainActivity extends Activity {
             int y = getHeight();
 
             Paint paint = new Paint();
-            paint.setColor(Color.BLUE);
-            paint.setStrokeWidth(2);
+
 
             paint.setStyle(Paint.Style.STROKE);
             canvas.drawPaint(paint);
+            paint.setColor(Color.BLUE);
+            paint.setStrokeWidth(2);
 //            paint.
             canvas.drawCircle(x / 2, y / 2, y / 2, paint);
             paint.setColor(Color.RED);

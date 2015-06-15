@@ -111,7 +111,8 @@
                     android:layout_height="fill_parent"
                     android:text="New Text"
                     android:id="@+id/resultsTextView"
-                    android:layout_weight = "1.0"/>
+                    android:layout_weight = "1.0"
+                    android:textColor="#ff000000" />
         </ScrollView>
     </LinearLayout>
 

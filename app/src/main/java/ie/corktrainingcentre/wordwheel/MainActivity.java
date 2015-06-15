@@ -103,9 +103,9 @@ public class MainActivity extends Activity {
     private void refreshWordWheel()
     {
         wordWheel.setWordlenght(Integer.valueOf((String) spinner.getSelectedItem()));
-//        textView.setText(wordWheel.getWord());
-//        textView2.setText(wordWheel.scrambledWord(wordWheel.getWord()));
-//        textView2.append("--" + wordWheel.getCentreChar());
+        textView.setText(wordWheel.getWord());
+        textView2.setText(wordWheel.scrambledWord(wordWheel.getWord()));
+        textView2.append("--" + wordWheel.getCentreChar());
         resultsTextView.setText("");
         wordWheelLinearLayout.removeAllViews();
         wordWheelLinearLayout.addView(new wordWheelView(this));
